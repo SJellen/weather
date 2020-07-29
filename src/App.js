@@ -10,7 +10,7 @@ function App() {
   
   return (
     <div className="App">
-     <h1 className="title">Weather</h1>
+     <h1 className="title">Weather<span className="material-icons ">beach_access</span></h1>
     <Weather />
    
     </div>

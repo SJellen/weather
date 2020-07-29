@@ -105,18 +105,31 @@ function Weather() {
       }
 
       
-
+            const weatherStyle = {
+                backgroundColor: 
+                    weather.temp > 90 ? 'rgba(200,25,18, .5)' : 
+                    weather.temp > 80 ? 'rgba(255,95,64,.5)' : 
+                    weather.temp > 70 ? 'rgba(255,163,114, .5)' : 
+                    weather.temp > 60 ? 'rgba(247,197,168, .5)' :
+                    weather.temp > 50 ? 'rgba(111,185,143, .5)' :
+                    weather.temp > 40 ? 'rgba(53,176,171, .5)' :
+                    weather.temp > 32 ? 'rgba(64,112,136,.5)' :
+                    weather.temp > 0 ? 'rgba(4,47,75, .5)' :
+                    weather.temp = 0 ? 'rgba(0,8,57, .5)' :
+                    weather.temp < 0 ? 'rgba(93,91,106, .5)' :
+                    'rgba(50,130,184, .75)'
+            }
       
      
 
     return (
-        <div className="weather">
+        <div className="weather" style={weatherStyle}>
                <div className="input-box">
                
                    <input 
                        className="material-input"
                        type="text"
-                       placeholder="Zip Code"
+                       placeholder="90210"
                        onChange={handleSearch}
                        maxLength='5'
                        onKeyPress={(e) => e.key === 'Enter' ? getWeather() : null}
@@ -131,7 +144,7 @@ function Weather() {
                <p className="error">{isValidZip ? "" : "Invalid Zip Code"}</p>
                <div className="weather-box" >
                         {weather.name === null ? (
-                            <p >No Weather Info</p>
+                            <p >Enter Zip Code for weather</p>
                         ) : ""}
                    
                    {weather.name !== null ? (
