@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  color: white;
 }
 
 body {
@@ -7,9 +8,14 @@ body {
   background-color: rgb(13, 13, 13);
 }
 
+.title {
+  text-align: end;
+  margin-right: 5%;
+}
+
 .weather {
   background-color: rgb(30, 30, 30);
-  max-width: 500px;
+  max-width: 400px;
   margin: 3rem auto;
   padding: 2rem;
   border-radius: 2rem;
@@ -18,11 +24,20 @@ body {
 
 .input-box {
   margin-top: 2rem;
+  border-bottom: 1px solid white;
+  width: 90%;
+  margin: 0 auto;
+  display: flex;
 }
 
 input {
-  background-color: blanchedalmond;
+  background-color: transparent;
   border: none;
+  outline: none;
+  width: 90%;
+  color: white;
+  padding: 10px;
+  
 }
 
 button {
@@ -31,6 +46,23 @@ button {
 }
 
 input::placeholder {
-  padding-left: 2rem;
-  font-size: .65rem;
+  color: white;
+  opacity: .5;
+  font-size: .85rem;
+}
+
+input[type=text]:focus {
+  border: transparent;
+}
+
+
+.search {
+  background-color: transparent;
+  color: white;
+  opacity: .5;
+  outline: none;
+}
+
+.p-icon {
+  color: red;
 }

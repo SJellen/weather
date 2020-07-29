@@ -1,4 +1,5 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
+
 
 
 const apiKEY = process.env.REACT_APP_WEATHERING_API_KEY
@@ -10,56 +11,59 @@ const apiKEY = process.env.REACT_APP_WEATHERING_API_KEY
 
 
 function Weather() {
-    const [weather, setWeather] = useState([])
+    const [weather, setWeather] = useState({
+        temp: null,
+        name: null,
+        icon: null,
+        main: null,
+        wind: null,
+        humidity: null,
+        maxTemp: null,
+        minTemp: null
+
+    })
     const [city, setCity] = useState(90210)
-    const [temp, setTemp] = useState("") 
-    const [name, setName] = useState("")
-    const [icon, setIcon] = useState("")
-    const [description, setDescription] = useState("")
-    const [main, setMain] = useState("")   
-    const [country, setCountry]  = useState("")
-    const [wind, setWind] = useState("")
-    const [humidity, setHumidity] = useState("")
-    const [maxTemp, setMaxtemp] = useState('')
-    const [minTemp, setMintemp] = useState('')
+   
 
     const [isValidZip, setIsValidZip] = useState(true)
     
     
-    const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKEY}&units=imperial`  //search by name
+    // const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKEY}&units=imperial`  //search by name
 
     const url2 = `https://api.openweathermap.org/data/2.5/weather?zip=${city},us&appid=${apiKEY}&units=imperial` // search by zip
     
 
 
 
-    useEffect(() => {
+    // useEffect(() => {
         
-        fetch(url2)
-        .then(res => res.json())
-        .then(
-            (result) => {
-                setName(result.name)
-                setTemp(result.main.temp)
-                setIcon(result.weather[0].icon)
-                setDescription(result.weather[0].description)
-                setMain(result.weather[0].main)
-                setCountry(result.sys.country)
-                setWind(result.wind)
-                setHumidity(result.main.humidity)
-                setMaxtemp(result.main.temp_max)
-                setMintemp(result.main.temp_min)
-            }
-        )
-        .catch(error => console.log(error))
-       }, [])
+    //     fetch(url2)
+    //     .then(res => res.json())
+    //     .then(
+    //         (result) => {
+    //             setWeather({
+    //                 temp: result.main.temp,
+    //                 name: result.name,
+    //                 icon: result.weather[0].icon,
+    //                 description: result.weather[0].description,
+    //                 main: result.weather[0].main,
+    //                 wind: result.wind,
+    //                 humidity: result.main.humidity,
+    //                 maxTemp: result.main.temp_max,
+    //                 minTemp: result.main.temp_min
+    //             })
+
+    //         }
+    //     )
+    //     .catch(error => console.log(error))
+    //    }, [])
 
 
       
 
       
 
-      const iconLink = `http://openweathermap.org/img/wn/${icon}@4x.png`
+      const iconLink = `http://openweathermap.org/img/wn/${weather.icon}@4x.png`
 
       function handleSearch(event) {
             let zipCode = event.target.value
@@ -84,21 +88,23 @@ function Weather() {
         .then(res => res.json())
         .then(
             (result) => {
-                
-                setName(result.name)
-                setTemp(result.main.temp)
-                setIcon(result.weather[0].icon)
-                setDescription(result.weather[0].description)
-                setMain(result.weather[0].main)
-                setCountry(result.sys.country)
-                setWind(result.wind)
-                setHumidity(result.main.humidity)
-                setMaxtemp(result.main.temp_max)
-                setMintemp(result.main.temp_min)
+                setWeather({
+                    temp: result.main.temp,
+                    name: result.name,
+                    icon: result.weather[0].icon,
+                    main: result.weather[0].main,
+                    wind: result.wind,
+                    humidity: result.main.humidity,
+                    maxTemp: result.main.temp_max,
+                    minTemp: result.main.temp_min
+                })
+               
             }
         )
         .catch(error => console.log(error))
       }
+
+      
 
       
      
@@ -106,28 +112,50 @@ function Weather() {
     return (
         <div className="weather">
                <div className="input-box">
-               <p className="error">{isValidZip ? "" : "Invalid Zip Code"}</p>
+               
                    <input 
+                       className="material-input"
                        type="text"
-                       placeholder="Enter Zip Code"
+                       placeholder="Zip Code"
                        onChange={handleSearch}
                        maxLength='5'
-                       
+                       onKeyPress={(e) => e.key === 'Enter' ? getWeather() : null}
                    />
-                   <button onClick={getWeather}>Weather</button>
+                   <button 
+                   onClick={getWeather}
+                   
+                   className="material-icons search"
+                   >{isValidZip ? "search" : ""}</button>
                    
                </div>
-               <div className="weather-box">
-                   <h2>{name}</h2>
+               <p className="error">{isValidZip ? "" : "Invalid Zip Code"}</p>
+               <div className="weather-box" >
+                        {weather.name === null ? (
+                            <p >No Weather Info</p>
+                        ) : ""}
+                   
+                   {weather.name !== null ? (
+                       <div>
+                            <h2>{weather.name}</h2>
                <img src={iconLink} alt="weather icon"/>
-               <h1>{Math.round(temp)}</h1>
-               <h3>{Math.round(maxTemp)}</h3> <h3>{Math.round(minTemp)}</h3>
-               
-               <p>{main}<br></br>{description}</p>
+               <p>{weather.main}</p>
+
                 
-                <h3>Humidity {humidity} %</h3>
+               <h1>{Math.round(weather.temp)}&#176;  F</h1>
+               <h3>Hi {Math.round(weather.maxTemp)}&#176;  F</h3>
+               <h3>Lo {Math.round(weather.minTemp)}&#176;  F</h3>
+               
+               
+                
+                <h3>Humidity {weather.humidity} %</h3>
               
-               <p>Wind {Math.round(wind.speed)}MPH</p>
+               <p>Wind {Math.round(weather.wind.speed)}MPH</p>
+                       </div>
+                      
+                   ) : ''}
+                   
+                   
+                   
                </div>
                
               
