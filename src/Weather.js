@@ -4,7 +4,6 @@ import React, {useState, useEffect} from 'react'
 
 const apiKEY = process.env.REACT_APP_WEATHERING_API_KEY
 
-// const apiKEY ="6fa756841d9002af83414a825ce78033"
  
 
 
