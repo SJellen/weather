@@ -78,6 +78,9 @@ input[type=text]:focus {
   color: red;
 }
 
+.error {
+  color: rgb(226, 159, 159);
+}
 
 @media only screen and (max-width: 600px) {
     .weather {
