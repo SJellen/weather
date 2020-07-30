@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, {useState, useEffect} from 'react'
 
 
 
@@ -10,6 +10,26 @@ const apiKEY = process.env.REACT_APP_WEATHERING_API_KEY
 
 function Weather() {
 
+    useEffect(() => {
+        fetch(url2)
+        .then(res => res.json())
+        .then(
+            (result) => {
+                setWeather({
+                    temp: null,
+                    name: null,
+                    icon: null,
+                    main: null,
+                    wind: null,
+                    humidity: null,
+                    maxTemp: null,
+                    minTemp: null
+                })
+               
+            }
+        )
+        .catch(error => console.log(error))
+    }, [])
 
 
     const [weather, setWeather] = useState({
