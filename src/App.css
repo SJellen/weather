@@ -40,6 +40,10 @@ input {
   
 }
 
+.search:hover {
+  cursor: pointer;
+}
+
 button {
   border: none;
   margin-left: .5rem;
