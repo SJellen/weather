@@ -123,9 +123,11 @@ function Weather() {
                        onChange={handleSearch}
                        maxLength='5'
                        onKeyPress={(e) => e.key === 'Enter' ? getWeather() : null}
+                       title="input"
                    />
                    <button 
                        onClick={getWeather}
+                       title="button"
                        className="material-icons search"
                        >{isValidZip ? "search" : ""}
                    </button>
