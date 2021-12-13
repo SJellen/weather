@@ -37,7 +37,6 @@ input {
   width: 90%;
   color: white;
   padding: 10px;
-  
 }
 
 .search:hover {
@@ -59,7 +58,6 @@ input[type=text]:focus {
   border: transparent;
 }
 
-
 .search {
   background-color: transparent;
   color: white;
@@ -71,7 +69,6 @@ input[type=text]:focus {
   display: flex;
   justify-content: center;
   align-items: center;
-
 }
 
 .p-icon {

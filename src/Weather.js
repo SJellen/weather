@@ -1,11 +1,6 @@
 import React, {useState, useEffect} from 'react'
 
-
-
 const apiKEY = process.env.REACT_APP_WEATHERING_API_KEY
-
- 
-
 
 function Weather() {
 
@@ -24,12 +19,10 @@ function Weather() {
                     maxTemp: null,
                     minTemp: null
                 })
-               
             }
         )
         .catch(error => console.log(error))
     }, [])
-
 
     const [weather, setWeather] = useState({
         temp: null,
@@ -46,10 +39,7 @@ function Weather() {
    
 
     const [isValidZip, setIsValidZip] = useState(true)
-    
-    
     // const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKEY}&units=imperial`  //search by name
-
     const url2 = `https://api.openweathermap.org/data/2.5/weather?zip=${city},us&appid=${apiKEY}&units=imperial` // search by zip
      
 
@@ -59,13 +49,11 @@ function Weather() {
             let zipCode = event.target.value
             let isValid = validateZip(zipCode)
             setCity(zipCode)
-
             if (isValid || zipCode === '' || isValid.length === 5) {
                 setIsValidZip(true)
             } else {
                 setIsValidZip(false)
-            }
-            
+            }   
       }
 
       function validateZip(zipCode) {
@@ -87,14 +75,12 @@ function Weather() {
                     humidity: result.main.humidity,
                     maxTemp: result.main.temp_max,
                     minTemp: result.main.temp_min
-                })
-               
+                })        
             }
         )
         .catch(error => console.log(error))
       }
 
-      
             const weatherStyle = {
                 backgroundColor: 
                     weather.temp > 90 ? 'rgba(200,25,18, .5)' : 
@@ -110,12 +96,9 @@ function Weather() {
                     'rgba(50,130,184, .75)'
             }
       
-     
-
     return (
         <div className="weather" style={weatherStyle}>
                <div className="input-box">
-               
                    <input 
                        className="material-input"
                        type="text"
