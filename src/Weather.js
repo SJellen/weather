@@ -43,7 +43,7 @@ function Weather() {
     const url2 = `https://api.openweathermap.org/data/2.5/weather?zip=${city},us&appid=${apiKEY}&units=imperial` // search by zip
      
 
-      const iconLink = `http://openweathermap.org/img/wn/${weather.icon}@4x.png`
+      const iconLink = `https://openweathermap.org/img/wn/${weather.icon}@4x.png`
 
       function handleSearch(event) {
             let zipCode = event.target.value
